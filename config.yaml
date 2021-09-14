@@ -11,9 +11,9 @@ mysql:
   hostname: 'localhost'
   port: 3306
   config: 'charset=utf8mb4&parseTime=True&loc=Local'
-  db-name: 'mattermost_test'
-  username: 'mmuser'
-  password: 'mostest'
+  db-name: 'db-test'
+  username: 'test-username'
+  password: '000000'
   max-idle-cons: 10
   max-open-cons: 100
   log-mode: true
@@ -24,7 +24,7 @@ mysql:
 zap:
   level: 'info'
   format: 'console'
-  prefix: '[mattermost-rights]'
+  prefix: '[rights-log]'
   director: 'logs'
   link-name: 'latest_log'
   show-line: true
