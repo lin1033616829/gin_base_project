@@ -1,8 +1,19 @@
 package config
 
 type ServConf struct {
-	Mysql    Mysql `mapstructure:"mysql" json:"mysql" yaml:"mysql"`
-	Zap      Zap   `mapstructure:"zap" json:"zap" yaml:"zap"`
+	System System `mapstructure:"system" json:"system" yaml:"system"`
+	Mysql  Mysql  `mapstructure:"mysql" json:"mysql" yaml:"mysql"`
+	Zap    Zap    `mapstructure:"zap" json:"zap" yaml:"zap"`
+}
+
+type System struct {
+	Env           string `mapstructure:"env" json:"env" yaml:"env"`
+	Port          string `mapstructure:"port" json:"port" yaml:"port"`
+	DbType        string `mapstructure:"db-type" json:"dbType" yaml:"db-type"`
+	OssType       string `mapstructure:"oss-type" json:"ossType" yaml:"oss-type"`
+	UseMultipoint bool   `mapstructure:"use-multipoint" json:"useMultipoint" yaml:"use-multipoint"`
+	ReqLimit      bool   `mapstructure:"req-limit" json:"req-limit" yaml:"req-limit"`
+	ReqLimitTimes int    `mapstructure:"req-limit-times" json:"req-limit-times" yaml:"req-limit-times"`
 }
 
 type Mysql struct {

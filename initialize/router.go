@@ -1,18 +1,17 @@
 package initialize
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"mmfile/middleware"
 	"mmfile/router"
 )
 
-var Router = gin.Default()
 
 // 初始化总路由
 
-func InitRouter() *gin.Engine {
-
-
+func InitRouter(Router *gin.Engine) *gin.Engine {
+	fmt.Println("开始注册路由")
 	PrivateGroup := Router.Group("")
 	PrivateGroup.Use(middleware.RateMiddleware())
 	{

@@ -4,4 +4,4 @@ nohup.out
 mmfile
 *.log
 .vscode
-configs/config.yaml
+config.yaml

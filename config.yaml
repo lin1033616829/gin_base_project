@@ -1,19 +1,21 @@
-# system configuration  oss-type: 'aliyun'    # 控制oss选择走本期还是 七牛等其他仓 自行增加其他oss仓可以在 server/utils/upload/upload.go 中 NewOss函数配置
 system:
-  env: 'public'  # Change to "develop" to skip authentication for development mode
-  addr: 8888
-  db-type: 'mysql'
+  env: "public"
+  port: "8888"
+  db-type: "mysql"
+  oss-type: "aliyun"
   use-multipoint: false
+  req-limit: false
+  req-limit-times: 10
 
 
 # mysql connect configuration
 mysql:
-  hostname: 'localhost'
+  hostname: '10.2.4.10'
   port: 3306
   config: 'charset=utf8mb4&parseTime=True&loc=Local'
-  db-name: 'db-test'
-  username: 'test-username'
-  password: '000000'
+  db-name: 'mattermost_test'
+  username: 'mmuser'
+  password: 'mostest'
   max-idle-cons: 10
   max-open-cons: 100
   log-mode: true
@@ -24,7 +26,7 @@ mysql:
 zap:
   level: 'info'
   format: 'console'
-  prefix: '[rights-log]'
+  prefix: '[file-log]'
   director: 'logs'
   link-name: 'latest_log'
   show-line: true
