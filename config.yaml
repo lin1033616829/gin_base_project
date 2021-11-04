@@ -1,6 +1,6 @@
 system:
   env: "public"
-  port: "8888"
+  port: 8888
   db-type: "mysql"
   oss-type: "aliyun"
   use-multipoint: false

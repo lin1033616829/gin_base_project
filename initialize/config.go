@@ -7,7 +7,7 @@ import (
 	"mmfile/global"
 )
 
-func InitConf(path ...string) *viper.Viper {
+func initConf(path ...string) *viper.Viper {
 	fmt.Println("初始化配置文件")
 	var config string
 

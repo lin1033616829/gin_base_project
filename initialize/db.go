@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-func InitDb() {
+func initDb() {
 	fmt.Println("初始化数据库")
 
 	dataSource := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?%v",

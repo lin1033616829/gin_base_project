@@ -8,7 +8,7 @@ type ServConf struct {
 
 type System struct {
 	Env           string `mapstructure:"env" json:"env" yaml:"env"`
-	Port          string `mapstructure:"port" json:"port" yaml:"port"`
+	Port          int    `mapstructure:"port" json:"port" yaml:"port"`
 	DbType        string `mapstructure:"db-type" json:"dbType" yaml:"db-type"`
 	OssType       string `mapstructure:"oss-type" json:"ossType" yaml:"oss-type"`
 	UseMultipoint bool   `mapstructure:"use-multipoint" json:"useMultipoint" yaml:"use-multipoint"`

@@ -3,17 +3,22 @@ package initialize
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"go.uber.org/zap"
 	"mmfile/global"
 )
 
-func init() {
+func RunServer() {
 	fmt.Println("初始化工作开始......")
 
-	global.ServerViper = InitConf()
+	global.ServerViper = initConf()
 	global.ServerLog = InitZap()
-	InitDb()
+	initDb()
+
 	newRouter := gin.Default()
-	InitRouter(newRouter)
+	initRouter(newRouter)
 	fmt.Println("初始化工作结束......")
-	newRouter.Run(global.ServerConf.System.Port)
+	err := newRouter.Run(fmt.Sprintf(":%v", global.ServerConf.System.Port))
+	if err != nil {
+		global.ServerLog.Error("routerErr", zap.Error(err))
+	}
 }
