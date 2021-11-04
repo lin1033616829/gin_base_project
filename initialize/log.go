@@ -2,11 +2,13 @@ package initialize
 
 import (
 	"fmt"
+	apostates "github.com/lestrrat-go/file-rotatelogs"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
-	"mmrights/global"
-	"mmrights/utils"
+	"mmfile/global"
+	"mmfile/utils"
 	"os"
+	"path"
 	"time"
 )
 
@@ -90,7 +92,7 @@ func getEncoder() zapcore.Encoder {
 
 // getEncoderCore 获取Encoder的zapCore.Core
 func getEncoderCore() (core zapcore.Core) {
-	writer, err := utils.GetWriteSyncer() // 使用file-rotateLogs进行日志分割
+	writer, err := getWriteSyncer() // 使用file-rotateLogs进行日志分割
 	if err != nil {
 		fmt.Printf("Get Write Syncer Failed err:%v", err.Error())
 		return
@@ -101,4 +103,20 @@ func getEncoderCore() (core zapcore.Core) {
 // CustomTimeEncoder 自定义日志输出时间格式
 func CustomTimeEncoder(t time.Time, enc zapcore.PrimitiveArrayEncoder) {
 	enc.AppendString(t.Format(global.ServerConf.Zap.Prefix + global.TimeFmt))
+}
+
+
+func getWriteSyncer() (zapcore.WriteSyncer, error) {
+	fileWriter, err := apostates.New(
+		path.Join(global.ServerConf.Zap.Director, "%Y-%m-%d.log"),
+		apostates.WithLinkName(global.ServerConf.Zap.LinkName),
+		apostates.WithMaxAge(7*24*time.Hour),
+		apostates.WithRotationTime(24*time.Hour),
+	)
+
+	if global.ServerConf.Zap.LogInConsole {
+		return zapcore.NewMultiWriteSyncer(zapcore.AddSync(os.Stdout), zapcore.AddSync(fileWriter)), err
+	}
+
+	return zapcore.AddSync(fileWriter), err
 }

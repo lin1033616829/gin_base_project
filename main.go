@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"mmrights/global"
-	_ "mmrights/initialize"
+	"mmfile/global"
+	_ "mmfile/initialize"
 )
 
 func main(){

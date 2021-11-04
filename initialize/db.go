@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
-	"mmrights/global"
-	"mmrights/store/sqlstore"
+	"mmfile/global"
+	"mmfile/store/sqlstore"
 	"time"
 )
 
@@ -50,8 +50,7 @@ func InitDb() {
 	sqlDB.SetConnMaxLifetime(time.Hour)
 
 	db = db.Debug()
-	global.ServerDb = db
-	global.Store = sqlstore.NewSqlSupplier()
+	_ = sqlstore.NewSqlSupplier(db, global.ServerLog)
 
 	fmt.Println("数据库连接成功")
 

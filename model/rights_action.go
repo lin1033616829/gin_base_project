@@ -1,6 +1,6 @@
 package model
 
-import "mmrights/utils"
+import "mmfile/utils"
 
 const (
 	RightsActionTableName = "RightsActions"

@@ -2,75 +2,44 @@ package sqlstore
 
 import (
 	"fmt"
-	"mmrights/store"
+	"go.uber.org/zap"
+	"gorm.io/gorm"
+	"mmfile/store"
 )
 
-type  SqlSupplierStores struct {
-	rightsRole           store.RightsRoleStore
-	rightsRoleGroup      store.RightsRoleGroupStore
-	rightsAction         store.RightsActionStore
-	rightsActionGroup    store.RightsActionGroupStore
+type SqlSupplierStores struct {
 	rightsRelationAction store.RightsRelationActionStore
-	rightsUserRole       store.RightsUserRoleStore
-	rightsMenuGroup      store.RightsMenuGroupStore
-	rightsMenu           store.RightsMenuStore
-	rightsRoleMenu       store.RightsRoleMenuStore
-
 }
 
 type SqlSupplier struct {
 	stores SqlSupplierStores
+	master *gorm.DB
+	logger *zap.Logger
 }
 
-func NewSqlSupplier() *SqlSupplier {
+func (ss *SqlSupplier) InitConnection(masterDb *gorm.DB, logger *zap.Logger) {
+	fmt.Println("数据库仓库初始化...")
+	ss.master = masterDb
+	ss.logger = logger
+
+	ss.stores.rightsRelationAction = NewSqlRightsRelationActionStore(ss)
+}
+
+func NewSqlSupplier(defaultDb *gorm.DB, logger *zap.Logger) *SqlSupplier {
 	supplier := &SqlSupplier{}
-
-	supplier.initConnection()
-
-	supplier.stores.rightsRelationAction = NewSqlRightsRelationActionStore(supplier)
-	supplier.stores.rightsUserRole = NewSqlRightsUserRoleStore(supplier)
-
+	supplier.InitConnection(defaultDb, logger)
 
 	return supplier
 }
 
-func (ss *SqlSupplier) initConnection() {
-	fmt.Println("数据库仓库初始化...")
+func (ss *SqlSupplier) getMaster() *gorm.DB {
+	return ss.master
 }
 
-
-func (ss *SqlSupplier) RightsRole() store.RightsRoleStore {
-	return ss.stores.rightsRole
-}
-
-func (ss *SqlSupplier) RightsRoleGroup() store.RightsRoleGroupStore {
-	return ss.stores.rightsRoleGroup
-}
-
-func (ss *SqlSupplier) RightsAction() store.RightsActionStore {
-	return ss.stores.rightsAction
-}
-
-func (ss *SqlSupplier) RightsActionGroup() store.RightsActionGroupStore {
-	return ss.stores.rightsActionGroup
+func (ss *SqlSupplier) getLogger() *zap.Logger {
+	return ss.logger
 }
 
 func (ss *SqlSupplier) RightsRelationAction() store.RightsRelationActionStore {
 	return ss.stores.rightsRelationAction
-}
-
-func (ss *SqlSupplier) RightsUserRole() store.RightsUserRoleStore {
-	return ss.stores.rightsUserRole
-}
-
-func (ss *SqlSupplier) RightsMenuGroup() store.RightsMenuGroupStore {
-	return ss.stores.rightsMenuGroup
-}
-
-func (ss *SqlSupplier) RightsMenu() store.RightsMenuStore {
-	return ss.stores.rightsMenu
-}
-
-func (ss *SqlSupplier) RightsRoleMenu() store.RightsRoleMenuStore {
-	return ss.stores.rightsRoleMenu
 }

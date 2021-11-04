@@ -2,7 +2,7 @@ package initialize
 
 import (
 	"fmt"
-	"mmrights/global"
+	"mmfile/global"
 )
 
 func init() {

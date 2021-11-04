@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/spf13/viper"
-	"mmrights/global"
+	"mmfile/global"
 )
 
 func InitConf(path ...string) *viper.Viper {

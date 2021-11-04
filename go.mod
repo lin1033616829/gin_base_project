@@ -1,4 +1,4 @@
-module mmrights
+module mmfile
 
 go 1.16
 

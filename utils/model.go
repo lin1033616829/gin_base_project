@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/pborman/uuid"
-	"mmrights/global"
 	"strings"
 	"time"
 )
@@ -67,7 +66,6 @@ func GetMillis() int64 {
 
 func GetInSqlBySlice(itemSlice []string) (string, error) {
 	if len(itemSlice) == 0 {
-		global.ServerLog.Debug("in查询中 param 元素不能空")
 		return "", errors.New("参数禁止为空")
 	}
 

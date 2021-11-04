@@ -2,7 +2,7 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	v1 "mmrights/api/v1"
+	v1 "mmfile/api/v1"
 )
 
 func InitMindRightsRouter(Router *gin.RouterGroup) {

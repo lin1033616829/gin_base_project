@@ -1,0 +1,7 @@
+.idea
+nohup.out
+.out
+mmfile
+*.log
+.vscode
+configs/config.yaml

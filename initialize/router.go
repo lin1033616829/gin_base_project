@@ -2,8 +2,8 @@ package initialize
 
 import (
 	"github.com/gin-gonic/gin"
-	"mmrights/middleware"
-	"mmrights/router"
+	"mmfile/middleware"
+	"mmfile/router"
 )
 
 var Router = gin.Default()
