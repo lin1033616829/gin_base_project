@@ -1,0 +1,41 @@
+system:
+  env: "public"
+  port: 8888
+  db-type: "mysql"
+  oss-type: "aliyun"
+  use-multipoint: false
+  req-limit: false
+  req-limit-times: 10
+
+
+# mysql connect configuration
+mysql:
+  hostname: '10.2.4.10'
+  port: 3306
+  config: 'charset=utf8mb4&parseTime=True&loc=Local'
+  db-name: 'mattermost_test'
+  username: 'mmuser'
+  password: 'mostest'
+  max-idle-cons: 10
+  max-open-cons: 100
+  log-mode: true
+  log-zap: ""
+
+
+# zap logger configuration
+zap:
+  level: 'info'
+  format: 'console'
+  prefix: '[file-log]'
+  director: 'logs'
+  link-name: 'latest_log'
+  show-line: true
+  encode-level: 'LowercaseColorLevelEncoder'
+  stacktrace-key: 'stacktrace'
+  log-in-console: true
+
+# redis configuration
+redis:
+  db: 0
+  addr: '127.0.0.1:6379'
+  password: ''
